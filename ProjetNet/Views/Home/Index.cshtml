@@ -1,0 +1,78 @@
+﻿@model ProjetNet.Models.ContentModelView
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Projet .NET </h2>
+        <p >
+            <br />
+            <br />
+            Cette application permet de poster des messages , elle offre aussi la possibilitée de repondre
+            à ces messages via la possibilitée de poster des commentaires.Pour cela cliqué sur le message 
+            auxquels vous souhaitez repondre, et cliquez sur ajouter un commentaire. :)
+        </p>
+        <br /><br />
+        <p class="btn btn-default">@Html.ActionLink("Poster un message", "MCreate")</p>
+
+
+    </div>       
+
+    <div class="col-md-4">
+        <h2> Derniers messages postés</h2>
+            @foreach (var item in Model.Messages)
+            {
+                <table style="border:1px dotted black;">
+                    <tr><td>Posté le : @Html.DisplayFor(modelItem => item.Date)</td></tr>
+                    <tr><td>Par @Html.DisplayFor(modelItem => item.Posteur) @Html.DisplayFor(modelItem => item.ID)</td></tr>
+                    <tr>
+                        <td>
+                           <h4>@Html.DisplayFor(modelItem => item.Texte)</h4> 
+
+
+                        </td>
+                        <td>
+                            @Html.ActionLink("Voir Comm", "DetailMessage", new { id = item.ID }) |
+                            @Html.ActionLink("Delete", "MDelete", new { id = item.ID })
+                        </td>
+                        <td ></td>
+
+                    </tr>
+                </table>
+                <br />
+            }
+
+    </div>
+    <div id="commentaires" class="col-md-4">
+        <h2>Derniers commentaires postés</h2>
+@foreach (var item in Model.Commentaires)
+{
+    <table style="border:1px dotted black;">
+
+        <tr>
+            <td>Par @Html.DisplayFor(modelItem => item.Posteur)
+
+            </td>
+            <td>
+                 A : @Html.DisplayFor(modelItem => item.Date)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.ActionLink(item.Texte, "DetailMessage", new { id = item.id_message }) |
+            </td>
+            <td></td>
+            <td>
+                @Html.ActionLink("Delete", "CDelete", new { id = item.ID })
+
+
+            </td>
+            <td></td>
+        </tr>
+    </table>
+    <br />
+}
+
+        </div>
+</div>

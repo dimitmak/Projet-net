@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ProjetNet.Models.Commentaire>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Projet .NET </h2>
+        <p>
+            <br />
+            <br />
+            Cette application permet de poster des messages , elle offre aussi la possibilitée de repondre
+            à ces messages via la possibilitée de poster des commentaires.Pour cela cliqué sur le message
+            auxquels vous souhaitez repondre, et cliquez sur ajouter un commentaire. :)
+        </p>
+        <br /><br />
+        <p class="btn btn-default">@Html.ActionLink("Poster un message", "MCreate")</p>
+
+
+    </div> 
+    <div class="col-md-4">
+        <h2>Messages</h2>
+            <table style="border:1px dotted black;">
+                <tr><td>Posté le : @ViewBag.date</td></tr>
+                <tr><td>Par : @ViewBag.posteur </td></tr>
+                <tr>
+                    <td>
+                        <h3>@ViewBag.texte</h3>
+
+                    </td>
+                    </tr>
+                <tr><td></td>
+                    <td>
+                        @Html.ActionLink("Poster un commentaire", "CCreate", new { id = @ViewBag.id })
+                    </td>
+                </tr>
+                </table>
+
+
+    </div>
+    <div id="commentaires" class="col-md-4">
+        <h2>Commentaires</h2>
+        @foreach (var item in Model)
+        {
+            if ((item.id_message) == (ViewBag.id+""))
+            {
+
+            <table style="border:1px dotted black;" name=@Html.DisplayFor(modelItem => item.id_message)>
+
+                <tr>
+                    <td>Par : @Html.DisplayFor(modelItem => item.Posteur)</td>
+                    <td>Le : @Html.DisplayFor(modelItem => item.Date)</td>
+                    </tr>
+                <tr>
+                    <td>
+                        <h4>@Html.DisplayFor(modelItem => item.Texte)</h4>
+                    </td>
+
+                </tr>
+            </table>
+                }
+            }
+
+    </div>
+</div>

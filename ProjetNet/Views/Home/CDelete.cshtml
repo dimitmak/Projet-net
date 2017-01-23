@@ -1,0 +1,49 @@
+﻿@model ProjetNet.Models.Commentaire
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Etes vous sure de vouloir supprimer ce commentaire ?</h3>
+<div>
+    <h4>Commentaire</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Posteur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Posteur)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Texte)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Texte)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Supprimer" class="btn btn-default" /> |
+            @Html.ActionLink("Retour", "Index")
+        </div>
+    }
+</div>
