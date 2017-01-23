@@ -1,1 +1,2 @@
-.mdf
+*.mdf
+ProjetNet/App_Data/

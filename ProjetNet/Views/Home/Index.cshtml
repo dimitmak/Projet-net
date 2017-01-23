@@ -5,7 +5,7 @@
 
 <div class="row">
     <div class="col-md-4">
-        <h2>Projet .NET </h2>
+        <h2>Projet .NET @ViewBag.roles </h2>
         <p >
             <br />
             <br />
@@ -13,6 +13,12 @@
             à ces messages via la possibilitée de poster des commentaires.Pour cela cliqué sur le message 
             auxquels vous souhaitez repondre, et cliquez sur ajouter un commentaire. :)
         </p>
+        <h4>@if (@ViewBag.roles == "admin")
+        {   
+            <h4>Bravo vous etes un administrateur. Vous avez donc la possibilites de supprimer des messages
+            ou des commentaires. Mais attention un grand pouvoir implique de grandes responsabilites :)</h4>
+        }
+        </h4>
         <br /><br />
         <p class="btn btn-default">@Html.ActionLink("Poster un message", "MCreate")</p>
 
@@ -34,7 +40,10 @@
                         </td>
                         <td>
                             @Html.ActionLink("Voir Comm", "DetailMessage", new { id = item.ID }) |
+                            @if(@ViewBag.roles =="admin")
+                            {
                             @Html.ActionLink("Delete", "MDelete", new { id = item.ID })
+                           }
                         </td>
                         <td ></td>
 
@@ -64,8 +73,10 @@
             </td>
             <td></td>
             <td>
+@if (@ViewBag.roles == "admin")
+{
                 @Html.ActionLink("Delete", "CDelete", new { id = item.ID })
-
+}
 
             </td>
             <td></td>

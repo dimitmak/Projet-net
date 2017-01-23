@@ -23,7 +23,14 @@ namespace ProjetNet.Controllers
             var lm = dbm.Messages.ToList();
             lm.Reverse();
             vm.Messages = lm;
-
+            if (this.User.IsInRole("Admin"))
+            {
+                ViewBag.roles = "admin";
+            }
+            else
+            {
+                ViewBag.roles = "rien";
+            }
             return View(vm);
            // return View(dbm.Messages.ToList());
         }
